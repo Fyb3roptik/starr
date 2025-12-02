@@ -164,6 +164,10 @@ func (s *Sonarr) GetSeriesContext(ctx context.Context, tvdbID int64, includeSeas
 		req.Query.Add("includeSeasonImages", "true")
 	}
 
+	if includeSeasonImages {
+		req.Query.Add("includeSeasonImages", "true")
+	}
+
 	if err := s.GetInto(ctx, req, &output); err != nil {
 		return nil, fmt.Errorf("api.Get(%s): %w", &req, err)
 	}
@@ -234,6 +238,7 @@ func (s *Sonarr) GetSeriesByIDContext(ctx context.Context, seriesID int64, inclu
 	if includeSeasonImages {
 		req.Query.Add("includeSeasonImages", "true")
 	}
+
 	if err := s.GetInto(ctx, req, &output); err != nil {
 		return nil, fmt.Errorf("api.Get(%s): %w", &req, err)
 	}
